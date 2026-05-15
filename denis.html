@@ -1,0 +1,191 @@
+<!-- denis.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DENIS</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="denis-page">
+
+  <!-- ENTER SCREEN -->
+  <div id="enter-screen">
+    <div class="enter-text">-_-</div>
+  </div>
+
+  <!-- VIDEO -->
+  <video
+    id="denisVideo"
+    class="denis-video"
+    playsinline
+  >
+    <source src="denis.mp4" type="video/mp4">
+  </video>
+
+  <!-- TEXT -->
+  <h1 class="denis-text">
+    <span class="fixed-d">D</span><span class="typing-text"></span>
+  </h1>
+
+  <!-- SOCIALS -->
+  <div class="denis-socials">
+
+    <a href="https://soundcloud.com/denkvss" target="_blank" class="dvd-icon soundcloud-dvd">
+      <i class="fa-brands fa-soundcloud"></i>
+    </a>
+
+    <a href="https://open.spotify.com/user/y67eu8k2u6at2g2v1m87vusd8?si=81cbff0d40224f36" target="_blank" class="dvd-icon spotify-dvd">
+      <i class="fa-brands fa-spotify"></i>
+    </a>
+
+    <a href="https://www.instagram.com/denis5o7/" target="_blank" class="dvd-icon instagram-dvd">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+
+  </div>
+
+  <script>
+    const video = document.getElementById("denisVideo");
+    const enterScreen = document.getElementById("enter-screen");
+
+    video.volume = 1;
+    video.muted = false;
+
+    const typingElement = document.querySelector(".typing-text");
+
+    const text = "enis";
+
+    function typeLoop(){
+
+      typingElement.textContent = "";
+
+      let index = 0;
+
+      const typing = setInterval(() => {
+
+        typingElement.textContent += text[index];
+
+        index++;
+
+        if(index >= text.length){
+
+          clearInterval(typing);
+
+          setTimeout(() => {
+            deleteLoop();
+          }, 1000);
+        }
+
+      }, 180);
+    }
+
+    function deleteLoop(){
+
+      let current = text;
+
+      const deleting = setInterval(() => {
+
+        current = current.slice(0, -1);
+
+        typingElement.textContent = current;
+
+        if(current.length === 0){
+
+          clearInterval(deleting);
+
+          setTimeout(() => {
+            typeLoop();
+          }, 500);
+        }
+
+      }, 120);
+    }
+
+    enterScreen.addEventListener("click", () => {
+
+      enterScreen.classList.add("hide-enter");
+
+      video.play();
+
+      typeLoop();
+
+      setTimeout(() => {
+        enterScreen.style.display = "none";
+      }, 700);
+
+    });
+
+  </script>
+
+<script>
+  document.addEventListener("contextmenu", e => e.preventDefault());
+
+  document.addEventListener("keydown", e => {
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
+      (e.ctrlKey && e.key.toUpperCase() === "U")
+    ) {
+      e.preventDefault();
+    }
+  });
+</script>
+
+<script>
+  // disable right click
+  document.addEventListener("contextmenu", e => e.preventDefault());
+
+  // disable inspect shortcuts
+  document.addEventListener("keydown", e => {
+
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key.toUpperCase())) ||
+      (e.ctrlKey && e.key.toUpperCase() === "U")
+    ) {
+      e.preventDefault();
+    }
+
+  });
+
+  // devtools detector
+  setInterval(() => {
+
+    const devtoolsOpen =
+      window.outerWidth - window.innerWidth > 160 ||
+      window.outerHeight - window.innerHeight > 160;
+
+    if(devtoolsOpen){
+
+      document.body.innerHTML = "";
+      document.body.style.background = "black";
+
+    }
+
+  }, 500);
+</script>
+
+<script>
+  // disable drag
+  document.addEventListener("dragstart", e => {
+    e.preventDefault();
+  });
+
+  // disable image dragging
+  document.querySelectorAll("img, video").forEach(el => {
+    el.setAttribute("draggable", "false");
+  });
+
+  // disable text select
+  document.addEventListener("selectstart", e => {
+    e.preventDefault();
+  });
+</script>
+</body>
+</html>

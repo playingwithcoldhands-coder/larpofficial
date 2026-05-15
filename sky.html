@@ -1,0 +1,209 @@
+<!-- sky.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKY</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="sky-page">
+
+    <!-- ENTER SCREEN -->
+     <div id="enter-screen">
+  <div class="enter-text">:P</div>
+</div>
+
+<div class="snowflakes">
+  <span>❄</span><span>❅</span><span>❆</span><span>❄</span><span>❅</span>
+  <span>❆</span><span>❄</span><span>❅</span><span>❆</span><span>❄</span>
+  <span>❅</span><span>❆</span><span>❄</span><span>❅</span><span>❆</span>
+  <span>❄</span><span>❅</span><span>❆</span><span>❄</span><span>❅</span>
+  <span>❆</span><span>❄</span><span>❅</span><span>❆</span><span>❄</span>
+  <span>❅</span><span>❆</span><span>❄</span><span>❅</span><span>❆</span>
+  <span>❄</span><span>❅</span><span>❆</span><span>❄</span><span>❅</span>
+  <span>❆</span><span>❄</span><span>❅</span><span>❆</span><span>❄</span>
+  <span>❅</span><span>❆</span><span>❄</span><span>❅</span><span>❆</span>
+  <span>❄</span><span>❅</span><span>❆</span><span>❄</span><span>❅</span>
+</div>
+
+  <div class="social-box">
+
+  <a href="https://www.instagram.com/andr1_.nsu/" target="_blank" class="social-icon instagram">
+    <i class="fa-brands fa-instagram"></i>
+  </a>
+
+  <a href="https://soundcloud.com/gbrr-364759580" target="_blank" class="social-icon soundcloud">
+    <i class="fa-brands fa-soundcloud"></i>
+  </a>
+
+</div>
+
+  <video 
+  id="skyVideo"
+  class="sky-video"
+  playsinline
+  disablePictureInPicture
+>
+  <source src="sky.mp4" type="video/mp4">
+</video>
+
+  <h1 class="sky-name">
+    <span class="fixed-s">S</span><span class="sky-typing-text"></span>
+  </h1>
+
+<script>
+  const video = document.getElementById("skyVideo");
+  const enterScreen = document.getElementById("enter-screen");
+
+  video.volume = 1;
+  video.muted = false;
+
+  video.addEventListener("loadedmetadata", () => {
+    video.currentTime = 78;
+  });
+
+  video.addEventListener("seeked", () => {
+    video.style.opacity = "1";
+  });
+
+  video.addEventListener("ended", () => {
+    video.currentTime = 78;
+    video.play();
+  });
+
+  const skyTypingElement = document.querySelector(".sky-typing-text");
+  const skyText = "KY";
+
+  function skyTypeLoop(){
+
+    skyTypingElement.textContent = "";
+
+    let index = 0;
+
+    const typing = setInterval(() => {
+
+      skyTypingElement.textContent += skyText[index];
+
+      index++;
+
+      if(index >= skyText.length){
+
+        clearInterval(typing);
+
+        setTimeout(() => {
+          skyDeleteLoop();
+        }, 1000);
+      }
+
+    }, 180);
+  }
+
+  function skyDeleteLoop(){
+
+    let current = skyText;
+
+    const deleting = setInterval(() => {
+
+      current = current.slice(0, -1);
+
+      skyTypingElement.textContent = current;
+
+      if(current.length === 0){
+
+        clearInterval(deleting);
+
+        setTimeout(() => {
+          skyTypeLoop();
+        }, 500);
+      }
+
+    }, 120);
+  }
+
+  enterScreen.addEventListener("click", () => {
+
+    enterScreen.classList.add("hide-enter");
+
+    video.play();
+
+    skyTypeLoop();
+
+    setTimeout(() => {
+      enterScreen.style.display = "none";
+    }, 700);
+
+  });
+</script>
+
+<script>
+  document.addEventListener("contextmenu", e => e.preventDefault());
+
+  document.addEventListener("keydown", e => {
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
+      (e.ctrlKey && e.key.toUpperCase() === "U")
+    ) {
+      e.preventDefault();
+    }
+  });
+</script>
+
+<script>
+  // disable right click
+  document.addEventListener("contextmenu", e => e.preventDefault());
+
+  // disable inspect shortcuts
+  document.addEventListener("keydown", e => {
+
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key.toUpperCase())) ||
+      (e.ctrlKey && e.key.toUpperCase() === "U")
+    ) {
+      e.preventDefault();
+    }
+
+  });
+
+  // devtools detector
+  setInterval(() => {
+
+    const devtoolsOpen =
+      window.outerWidth - window.innerWidth > 160 ||
+      window.outerHeight - window.innerHeight > 160;
+
+    if(devtoolsOpen){
+
+      document.body.innerHTML = "";
+      document.body.style.background = "black";
+
+    }
+
+  }, 500);
+</script>
+
+<script>
+  // disable drag
+  document.addEventListener("dragstart", e => {
+    e.preventDefault();
+  });
+
+  // disable image dragging
+  document.querySelectorAll("img, video").forEach(el => {
+    el.setAttribute("draggable", "false");
+  });
+
+  // disable text select
+  document.addEventListener("selectstart", e => {
+    e.preventDefault();
+  });
+</script>
+</body>
+</html>

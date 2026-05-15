@@ -1,0 +1,88 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SKY Denis</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="cursorCanvas"></canvas>
+
+  <div class="container">
+    <div class="minecraft-text">
+      <a href="sky.html" class="name">SKY</a>
+      <a href="denis.html" class="name">Denis</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>
+  document.addEventListener("contextmenu", e => e.preventDefault());
+
+  document.addEventListener("keydown", e => {
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
+      (e.ctrlKey && e.key.toUpperCase() === "U")
+    ) {
+      e.preventDefault();
+    }
+  });
+</script>
+
+<script>
+  // disable right click
+  document.addEventListener("contextmenu", e => e.preventDefault());
+
+  // disable inspect shortcuts
+  document.addEventListener("keydown", e => {
+
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key.toUpperCase())) ||
+      (e.ctrlKey && e.key.toUpperCase() === "U")
+    ) {
+      e.preventDefault();
+    }
+
+  });
+
+  // devtools detector
+  setInterval(() => {
+
+    const devtoolsOpen =
+      window.outerWidth - window.innerWidth > 160 ||
+      window.outerHeight - window.innerHeight > 160;
+
+    if(devtoolsOpen){
+
+      document.body.innerHTML = "";
+      document.body.style.background = "black";
+
+    }
+
+  }, 500);
+</script>
+
+<script>
+  // disable drag
+  document.addEventListener("dragstart", e => {
+    e.preventDefault();
+  });
+
+  // disable image dragging
+  document.querySelectorAll("img, video").forEach(el => {
+    el.setAttribute("draggable", "false");
+  });
+
+  // disable text select
+  document.addEventListener("selectstart", e => {
+    e.preventDefault();
+  });
+</script>
+</body>
+</html>
